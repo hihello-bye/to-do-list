@@ -1,3 +1,5 @@
+function loadLists() {
+
 let toDoLists = [];
 let currentList = null;
 
@@ -7,4 +9,6 @@ const lists = document.getElementById('newList').addEventListener('click', (even
     console.log(toDoLists);
 })
 
-export { toDoLists, currentList, lists };
+};
+
+export { loadLists };
