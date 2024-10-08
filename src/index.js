@@ -1,1 +1,3 @@
-import { addList } from './lists.js';
+import { loadLists } from './lists.js';
+
+loadLists();
