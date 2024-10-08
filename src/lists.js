@@ -3,10 +3,20 @@ function loadLists() {
 let toDoLists = [];
 let currentList = null;
 
-const lists = document.getElementById('newList').addEventListener('click', (event) => {
-    const listValue = lists.value;
-    toDoLists.push(listValue);
-    console.log(toDoLists);
+const newList = document.getElementById('newList');
+const createList = document.getElementById('createListBtn');
+
+createList.addEventListener('click', (event) => {
+    const listValue = newList.value;
+
+    if (listValue) {
+        toDoLists.push(listValue);
+        console.log(toDoLists);
+
+        newList.value='';
+    } else {
+        console.log('Please name me');
+    }
 })
 
 };
