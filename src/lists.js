@@ -33,8 +33,6 @@ createTask.addEventListener('click', (event) => {
         const addTask = document.createElement('li');
         addTask.textContent = taskValue;
         tasks.appendChild(addTask);
-         currentList = toDoLists.find(tasks => tasks.task === taskValue);
-    
 
         newTask.value='';
     } 
