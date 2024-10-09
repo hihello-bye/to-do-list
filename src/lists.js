@@ -16,13 +16,10 @@ createList.addEventListener('click', (event) => {
     if (listValue) {
         toDoLists.push({name: listValue});
 
-        const switchList = document.createElement('button');
-        switchList.textContent = listValue;
-        lists.appendChild(switchList);
-
-        switchList.addEventListener('click', (event) => {
-            currentList = toDoLists.find(list => list.name === listValue);
-        })
+        const addList = document.createElement('button');
+        addList.textContent = listValue;
+        lists.appendChild(addList);
+        currentList = toDoLists.find(list => list.name === listValue);
 
         newList.value='';
     } 
@@ -37,7 +34,7 @@ createTask.addEventListener('click', (event) => {
         const addTask = document.createElement('li');
         addTask.textContent = taskValue;
         tasks.appendChild(addTask);
-        currentList = toDoLists.find(tasks => tasks.task === taskValue);
+         currentList = toDoLists.find(tasks => tasks.task === taskValue);
     
 
         newTask.value='';
