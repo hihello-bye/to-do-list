@@ -34,13 +34,11 @@ createTask.addEventListener('click', (event) => {
     if (taskValue) {
         toDoLists.push({task: taskValue});
         
-        const addTask = document.createElement('button');
+        const addTask = document.createElement('li');
         addTask.textContent = taskValue;
         tasks.appendChild(addTask);
-
-        addTask.addEventListener('click', (event) => {
-            currentList = toDoLists.find(tasks => tasks.task === taskValue);
-        })
+        currentList = toDoLists.find(tasks => tasks.task === taskValue);
+    
 
         newTask.value='';
     } 
