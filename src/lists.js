@@ -19,7 +19,6 @@ createList.addEventListener('click', (event) => {
         const addList = document.createElement('button');
         addList.textContent = listValue;
         lists.appendChild(addList);
-        currentList = toDoLists.find(list => list.name === listValue);
 
         newList.value='';
     } 
