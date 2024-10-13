@@ -15,6 +15,10 @@ function createList(name) {
     const listButton = document.createElement('button');
     listButton.textContent = name;
 
+    listButton.addEventListener('click', () => {
+        selectList(name);
+    })
+
     listContainer.appendChild(listButton);
 
 }
