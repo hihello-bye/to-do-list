@@ -34,6 +34,20 @@ createListBtn.addEventListener('click', () => {
 
 function selectList(listName) {
     currentList = toDoList.find(list => list.name === listName);
+    updateDisplay();
+
+}
+
+function updateDisplay() {
+    taskContainer.innerHTML = '';
+
+    if (currentList) {
+        currentList.tasks.foreach(task => {
+            const taskEntry = document.createElement('li');
+            taskEntry.textContent = task;
+            taskContainer.appendChild(taskEntry);
+        })
+    }
 }
 
 function addTask() {
@@ -42,6 +56,7 @@ function addTask() {
     if (currentList && taskDescription) {
         currentList.tasks.push(taskDescription);
         newTaskInput.value = '';
+        updateDisplay();
     } else if (!currentList) {
         alert('Select a list to add to');
     } else {
