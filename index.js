@@ -47,6 +47,7 @@ function addTask() {
     } else {
         alert('What do you need to do?');
     }
-
     
 }
+
+addTaskBtn.addEventListener('click', addTask);
