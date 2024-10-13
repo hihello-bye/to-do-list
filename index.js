@@ -11,4 +11,10 @@ const addTaskBtn = document.getElementById('addTaskBtn');
 function createList(name) {
     const newList = {name: name, tasks: []};
     toDoList.push(newList);
+
+    const listButton = document.createElement('button');
+    listButton.textContent = name;
+
+    listContainer.appendChild(listButton);
+
 }
