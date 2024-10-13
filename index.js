@@ -18,3 +18,12 @@ function createList(name) {
     listContainer.appendChild(listButton);
 
 }
+
+createListBtn.addEventListener('click', () => {
+    const listName = newListInput.value;
+
+    if (listName) {
+        createList(name);
+        newListInput.value = '';
+    }
+})
