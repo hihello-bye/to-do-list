@@ -35,3 +35,18 @@ createListBtn.addEventListener('click', () => {
 function selectList(listName) {
     currentList = toDoList.find(list => list.name === listName);
 }
+
+function addTask() {
+    const taskDescription = newTaskInput.value;
+
+    if (currentList && taskDescription) {
+        currentList.tasks.push(taskDescription);
+        newTaskInput.value = '';
+    } else if (!currentList) {
+        alert('Select a list to add to');
+    } else {
+        alert('What do you need to do?');
+    }
+
+    
+}
