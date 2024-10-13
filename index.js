@@ -27,7 +27,7 @@ createListBtn.addEventListener('click', () => {
     const listName = newListInput.value;
 
     if (listName) {
-        createList(name);
+        createList(listName);
         newListInput.value = '';
     }
 })
@@ -42,7 +42,7 @@ function updateDisplay() {
     taskContainer.innerHTML = '';
 
     if (currentList) {
-        currentList.tasks.foreach(task => {
+        currentList.tasks.forEach(task => {
             const taskEntry = document.createElement('li');
             taskEntry.textContent = task;
             taskContainer.appendChild(taskEntry);
