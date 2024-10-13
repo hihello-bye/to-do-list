@@ -27,3 +27,7 @@ createListBtn.addEventListener('click', () => {
         newListInput.value = '';
     }
 })
+
+function selectList(listName) {
+    currentList = toDoList.find(list => list.name === listName);
+}
