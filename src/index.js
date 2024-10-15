@@ -1,3 +1,5 @@
+import './style.css';
+
 let toDoList = [];
 let currentList = null;
 let defaultList = [
