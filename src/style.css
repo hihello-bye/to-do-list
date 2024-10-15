@@ -8,8 +8,17 @@ body {
     background-color: #93c5fd;
   }
 
-  .main-container {
+  #mainContainer {
     display: flex;
     flex: 1;
     padding: 20px;
+  }
+
+  #listContainer {
+    flex-basis: 20%;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
