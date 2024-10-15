@@ -55,6 +55,12 @@ function updateDisplay() {
     taskContainer.innerHTML = '';
 
     if (currentList) {
+
+        const listTitle = document.createElement('h2');
+        listTitle.textContent = currentList.name;
+        taskContainer.appendChild(listTitle);
+
+
         currentList.tasks.forEach(task => {
             const taskEntry = document.createElement('li');
             taskEntry.textContent = task;
