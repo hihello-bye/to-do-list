@@ -61,3 +61,33 @@ body {
     text-align: center;
     font-size: 18px;
   }
+
+  #inputContainer {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  #inputContainer input {
+    width: 200px;
+    background-color: #f9b8dc;
+    border: solid 2px #f9a8d4;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  #inputContainer button {
+    background-color: #93c5fd;
+    color: white;
+    border: solid 2px #569def;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #inputContainer button:hover {
+    background-color: #569def;
+  }
