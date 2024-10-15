@@ -1,5 +1,10 @@
 let toDoList = [];
 let currentList = null;
+let defaultList = [
+    {name: Today, tasks:['Complete To Do List']},
+    {name: Tomorrow, tasks:['Complete by tomorrow']},
+    {name: Sometime, tasks:['Complete one day']}
+];
 
 const listContainer = document.getElementById('listContainer');
 const taskContainer = document.getElementById('taskContainer');
