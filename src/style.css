@@ -7,3 +7,9 @@ body {
     min-height: 100vh;
     background-color: #93c5fd;
   }
+
+  .main-container {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+  }
