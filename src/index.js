@@ -28,6 +28,12 @@ function createList(name) {
 
 }
 
+function displayDefaultList() {
+    defaultList.forEach(list => {
+        createList(list.name, list.tasks);
+    })
+}
+
 createListBtn.addEventListener('click', () => {
     const listName = newListInput.value;
 
@@ -71,3 +77,4 @@ function addTask() {
 }
 
 addTaskBtn.addEventListener('click', addTask);
+displayDefaultList();
