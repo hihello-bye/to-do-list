@@ -61,19 +61,46 @@ function updateDisplay() {
         taskContainer.appendChild(listTitle);
 
 
-        currentList.tasks.forEach(task => {
+        currentList.tasks.forEach((task, index)  => {
             const taskEntry = document.createElement('li');
-            taskEntry.textContent = task;
+            taskEntry.classList.add('task');
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = task.completed;
+
+            checkbox.addEventListener('change', () => {
+                task.completed = checkbox.checked;
+                updateTask(taskLabel, task.completed);
+            })
+
+            const taskLabel = document.createElement('label');
+            taskLabel.textContent = task.description;
+
+            updateTask(taskLabel, task.completed);
+
+            taskEntry.appendChild(checkbox);
+            taskEntry.appendChild(taskLabel);
             taskContainer.appendChild(taskEntry);
         })
     }
 }
 
+function updateTask(taskLabel, isCompleted) {
+    if (isCompleted) {
+        taskLabel.classList.add('completed');
+        
+    } else {
+        taskLabel.classList.remove('completed');
+    }
+}
+
+
 function addTask() {
     const taskDescription = newTaskInput.value;
 
     if (currentList && taskDescription) {
-        currentList.tasks.push(taskDescription);
+        currentList.tasks.push({description: taskDescription, completed: false});
         newTaskInput.value = '';
         updateDisplay();
     } else if (!currentList) {
