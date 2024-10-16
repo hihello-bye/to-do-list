@@ -3,10 +3,11 @@ import { saveToLocalStorage, loadLocalStorage } from './storage.js';
 
 let toDoList = [];
 let currentList = null;
+
 let defaultList = [
-    {name: 'Today', tasks:['Complete To Do List']},
-    {name: 'Tomorrow', tasks:['Complete by tomorrow']},
-    {name: 'Sometime', tasks:['Complete one day']}
+    { name: 'Today', tasks: [{ description: 'Complete To Do List', completed: false }] },
+    { name: 'Tomorrow', tasks: [{ description: 'Complete by tomorrow', completed: false }] },
+    { name: 'Sometime', tasks: [{ description: 'Complete one day', completed: false }] }
 ];
 
 const listContainer = document.getElementById('listContainer');
@@ -18,84 +19,71 @@ const addTaskBtn = document.getElementById('addTaskBtn');
 
 document.addEventListener('DOMContentLoaded', () => {
     const storedData = loadLocalStorage();
-
-    if (storedData) {
+    
+    if (storedData && storedData.length > 0) {
         toDoList = storedData;
-        updateDisplay();
+        selectList(toDoList[0].name);
     } else {
         displayDefaultList();
     }
-})
+    displayListButtons();  
+});
 
 function createList(name, tasks = []) {
-    const newList = {name: name, tasks: tasks.map(task =>
-        typeof task ==='string' ? {description: task, completed: false} : task)
-    };
+    const newList = { name, tasks };
     toDoList.push(newList);
     saveToLocalStorage(toDoList);
-    updateDisplay();
-    
-    const listButton = document.createElement('button');
-    listButton.textContent = name;
-
-    listButton.addEventListener('click', () => {
-        selectList(name);
-    })
-
-    listContainer.appendChild(listButton);
-
+    displayListButtons();
 }
 
+function displayListButtons() {
+    listContainer.innerHTML = '';
+    toDoList.forEach(list => {
+        const listButton = document.createElement('button');
+        listButton.textContent = list.name;
+        listButton.addEventListener('click', () => {
+            selectList(list.name);
+        });
+        listContainer.appendChild(listButton);
+    });
+}
 
 function displayDefaultList() {
     defaultList.forEach(list => {
-        toDoList.push({name: list.name, tasks: list.tasks.map(task => ({description: task, completed: false}))});
-    })
+        createList(list.name, list.tasks);
+    });
     saveToLocalStorage(toDoList);
-    updateDisplay();
 }
-
-createListBtn.addEventListener('click', () => {
-    const listName = newListInput.value;
-
-    if (listName) {
-        createList(listName);
-        newListInput.value = '';
-    }
-})
 
 function selectList(listName) {
     currentList = toDoList.find(list => list.name === listName);
     updateDisplay();
-
 }
 
 function updateDisplay() {
     taskContainer.innerHTML = '';
 
     if (currentList) {
-
         const listTitle = document.createElement('h2');
         listTitle.textContent = currentList.name;
         taskContainer.appendChild(listTitle);
 
-
-        currentList.tasks.forEach((task, index)  => {
+        currentList.tasks.forEach((task, index) => {
             const taskEntry = document.createElement('li');
             taskEntry.classList.add('task');
-            
+
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.checked = task.completed;
 
             checkbox.addEventListener('change', () => {
                 task.completed = checkbox.checked;
+                saveToLocalStorage(toDoList);  // Save updated task status
                 updateTask(taskLabel, task.completed);
-            })
+            });
 
             const taskLabel = document.createElement('label');
             taskLabel.textContent = task.description;
-
             updateTask(taskLabel, task.completed);
 
             const deleteBtn = document.createElement('button');
@@ -104,20 +92,19 @@ function updateDisplay() {
 
             deleteBtn.addEventListener('click', () => {
                 deleteTask(index);
-            })
+            });
 
             taskEntry.appendChild(checkbox);
             taskEntry.appendChild(taskLabel);
             taskEntry.appendChild(deleteBtn);
             taskContainer.appendChild(taskEntry);
-        })
+        });
     }
 }
 
 function updateTask(taskLabel, isCompleted) {
     if (isCompleted) {
         taskLabel.classList.add('completed');
-        
     } else {
         taskLabel.classList.remove('completed');
     }
@@ -125,7 +112,7 @@ function updateTask(taskLabel, isCompleted) {
 
 function deleteTask(taskIndex) {
     currentList.tasks.splice(taskIndex, 1);
-
+    saveToLocalStorage(toDoList);
     updateDisplay();
 }
 
@@ -133,15 +120,25 @@ function addTask() {
     const taskDescription = newTaskInput.value;
 
     if (currentList && taskDescription) {
-        currentList.tasks.push({description: taskDescription, completed: false});
+        currentList.tasks.push({ description: taskDescription, completed: false });
         newTaskInput.value = '';
+        saveToLocalStorage(toDoList);
         updateDisplay();
     } else if (!currentList) {
-        alert('Select a list to add to');
+        alert('Select a list to add tasks');
     } else {
         alert('What do you need to do?');
     }
-    
 }
 
 addTaskBtn.addEventListener('click', addTask);
+
+createListBtn.addEventListener('click', () => {
+    const listName = newListInput.value;
+
+    if (listName) {
+        createList(listName); 
+        newListInput.value = '';
+    }
+});
+
