@@ -47,8 +47,10 @@ function createList(name) {
 
 function displayDefaultList() {
     defaultList.forEach(list => {
-        createList(list.name, list.tasks);
+        toDoList.push({name: list.name, tasks: list.tasks.map(task => ({description: task, completed: false}))});
     })
+    saveToLocalStorage(toDoList);
+    updateDisplay();
 }
 
 createListBtn.addEventListener('click', () => {
