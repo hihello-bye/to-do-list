@@ -1,4 +1,5 @@
 import './style.css';
+import { saveToLocalStorage, loadLocalStorage } from './storage.js';
 
 let toDoList = [];
 let currentList = null;
@@ -15,10 +16,21 @@ const createListBtn = document.getElementById('createListBtn');
 const newTaskInput = document.getElementById('newTaskInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
 
+document.addEventListener('DOMContentLoaded', () => {
+    const storedData = loadLocalStorage();
+
+    if (storedData) {
+        toDoList = storedData;
+        updateDisplay();
+    }
+})
+
 function createList(name) {
     const newList = {name: name, tasks: []};
     toDoList.push(newList);
-
+    saveToLocalStorage(toDoList);
+    updateDisplay();
+    
     const listButton = document.createElement('button');
     listButton.textContent = name;
 
@@ -29,6 +41,7 @@ function createList(name) {
     listContainer.appendChild(listButton);
 
 }
+
 
 function displayDefaultList() {
     defaultList.forEach(list => {
