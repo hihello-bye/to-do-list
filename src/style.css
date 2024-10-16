@@ -73,18 +73,30 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-}
+  }
 
-.task input[type="checkbox"] {
+  .task input[type="checkbox"] {
     margin-right: 10px;
-}
+  }
 
-.completed {
+  .completed {
     text-decoration: line-through;
     color: grey;
-}
+  }
 
-  
+  .delete-btn {
+    margin-left: 10px;
+    background-color: #93c5fd;
+    color: white;
+    border: solid 2px #569def;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .delete-btn:hover {
+    background-color: #569def;
+  }
 
   #inputContainer {
     width: 100%;
