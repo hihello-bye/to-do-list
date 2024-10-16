@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
-function createList(name) {
-    const newList = {name: name, tasks: []};
+function createList(name, tasks = []) {
+    const newList = {name: name, tasks: tasks.map(task =>
+        typeof task ==='string' ? {description: task, completed: false} : task)
+    };
     toDoList.push(newList);
     saveToLocalStorage(toDoList);
     updateDisplay();
