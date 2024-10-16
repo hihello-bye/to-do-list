@@ -3,7 +3,7 @@ export function saveToLocalStorage(data) {
 }
 
 export function loadLocalStorage() {
-    const storedList = localStorage.getItem('toDolist');
+    const storedList = localStorage.getItem('toDoList');
     
     if (storedList) {
         return JSON.parse(storedList);
