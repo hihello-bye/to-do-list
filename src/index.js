@@ -79,8 +79,17 @@ function updateDisplay() {
 
             updateTask(taskLabel, task.completed);
 
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.classList.add('delete-btn');
+
+            deleteBtn.addEventListener('click', () => {
+                deleteTask(index);
+            })
+
             taskEntry.appendChild(checkbox);
             taskEntry.appendChild(taskLabel);
+            taskEntry.appendChild(deleteBtn);
             taskContainer.appendChild(taskEntry);
         })
     }
@@ -95,6 +104,11 @@ function updateTask(taskLabel, isCompleted) {
     }
 }
 
+function deleteTask(taskIndex) {
+    currentList.tasks.splice(taskIndex, 1);
+
+    updateDisplay();
+}
 
 function addTask() {
     const taskDescription = newTaskInput.value;
