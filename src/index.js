@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (storedData) {
         toDoList = storedData;
         updateDisplay();
+    } else {
+        displayDefaultList();
     }
 })
 
@@ -139,4 +141,3 @@ function addTask() {
 }
 
 addTaskBtn.addEventListener('click', addTask);
-displayDefaultList();
