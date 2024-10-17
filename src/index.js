@@ -38,7 +38,7 @@ function createList(name, tasks = []) {
 
 function displayListButtons() {
     listContainer.innerHTML = '';
-    toDoList.forEach(list => {
+    toDoList.forEach((list, index) => {
         const listItemContainer = document.createElement('div');
         listItemContainer.classList.add('list-item-container');
 
@@ -48,7 +48,7 @@ function displayListButtons() {
 
         deleteListBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            deleteList();
+            deleteList(index);
         });
 
         const listButton = document.createElement('button');
@@ -93,7 +93,7 @@ function updateDisplay() {
 
             checkbox.addEventListener('change', () => {
                 task.completed = checkbox.checked;
-                saveToLocalStorage(toDoList);  // Save updated task status
+                saveToLocalStorage(toDoList);
                 updateTask(taskLabel, task.completed);
             });
 
@@ -132,11 +132,20 @@ function deleteTask(taskIndex) {
 }
 
 function deleteList(listIndex) {
-    toDoList.splice(listIndex, 1);
+    const deletedList = toDoList.splice(listIndex, 1);
 
-    if (toDoList.length === 0 || (currentList && currentList === toDoList[listIndex])) {
-        displayListButtons();
-        saveToLocalStorage();
+    if (currentList && currentList.name === deletedList[0].name) {
+        currentList = null;
+        taskContainer.innerHTML = '';
+    }
+
+    displayListButtons();
+    saveToLocalStorage(toDoList);
+
+    if (toDoList.length > 0) {
+        selectList(toDoList[0].name)
+    } else {
+        taskContainer.innerHTML = '';
     }
 }
 
