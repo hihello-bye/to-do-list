@@ -53,6 +53,8 @@ function displayListButtons() {
 
         const listButton = document.createElement('button');
         listButton.textContent = list.name;
+        listButton.classList.add('list-btn');
+
         listButton.addEventListener('click', () => {
             selectList(list.name);
         });
