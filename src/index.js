@@ -39,12 +39,27 @@ function createList(name, tasks = []) {
 function displayListButtons() {
     listContainer.innerHTML = '';
     toDoList.forEach(list => {
+        const listItemContainer = document.createElement('div');
+        listItemContainer.classList.add('list-item-container');
+
+        const deleteListBtn = document.createElement('button');
+        deleteListBtn.textContent = 'X';
+        deleteListBtn.classList.add('delete-list-btn');
+
+        deleteListBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteList();
+        });
+
         const listButton = document.createElement('button');
         listButton.textContent = list.name;
         listButton.addEventListener('click', () => {
             selectList(list.name);
         });
-        listContainer.appendChild(listButton);
+
+        listItemContainer.appendChild(listButton);
+        listItemContainer.appendChild(deleteListBtn);
+        listContainer.appendChild(listItemContainer);
     });
 }
 
@@ -115,6 +130,16 @@ function deleteTask(taskIndex) {
     saveToLocalStorage(toDoList);
     updateDisplay();
 }
+
+function deleteList(listIndex) {
+    toDoList.splice(listIndex, 1);
+
+    if (toDoList.length === 0 || (currentList && currentList === toDoList[listIndex])) {
+        displayListButtons();
+        saveToLocalStorage();
+    }
+}
+
 
 function addTask() {
     const taskDescription = newTaskInput.value;
